@@ -1,4 +1,5 @@
 // Movimiento Eje X
+velocidad_horizontal = 0;
 if (keyboard_check(vk_right) || keyboard_check(ord("D"))) {
 	velocidad_horizontal = 4;
 }
@@ -24,3 +25,17 @@ if (place_meeting(x, y + velocidad_vertical, obj_suelo)) {
 	velocidad_vertical = 0;
 }
 y = y + velocidad_vertical;
+// Orientación del personaje
+if (velocidad_horizontal != 0) {
+	image_xscale = -sign(velocidad_horizontal);
+}
+// Ataque del personaje
+if (keyboard_check_pressed(ord("G"))) {
+	sprite_index = spr_prota;
+	image_index = 0;
+	enemigo = instance_place(x, y, obj_enemigo);
+	if (enemigo != noone) {
+		enemigo.vida -= 10;
+	}
+}	
+	
